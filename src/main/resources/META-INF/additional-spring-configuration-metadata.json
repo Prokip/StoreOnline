@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.secret."
+    },
+    {
+      "name": "jwt.expiration",
+      "type": "java.lang.String",
+      "description": "Description for jwt.expiration."
+    },
+    {
+      "name": "spring.root.images",
+      "type": "java.lang.String",
+      "description": "Description for spring.root.images."
+    },
+    {
+      "name": "spring.root.files",
+      "type": "java.lang.String",
+      "description": "Description for spring.root.files."
+    }
+  ] }
