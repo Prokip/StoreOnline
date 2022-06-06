@@ -5,7 +5,9 @@ import com.online.store.dto.response.OrderResponse;
 import com.online.store.entity.Order;
 import com.online.store.entity.enums.Status;
 import com.online.store.repository.OrderRepository;
+import com.online.store.service.CardService;
 import com.online.store.service.OrderService;
+import com.online.store.service.UserService;
 import com.online.store.util.Constant;
 import com.online.store.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +31,11 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    private final UserServiceImpl userService;
-
-    private final CardServiceImpl cardService;
+    private final UserService userService;
+    private final CardService cardService;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, UserServiceImpl userService, CardServiceImpl cardService) {
+    public OrderServiceImpl(OrderRepository orderRepository, UserService userService, CardService cardService) {
         this.orderRepository = orderRepository;
         this.userService = userService;
         this.cardService = cardService;

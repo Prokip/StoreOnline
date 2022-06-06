@@ -8,10 +8,7 @@ import com.online.store.entity.ProductFile;
 import com.online.store.entity.ProductImage;
 import com.online.store.repository.ProductRepository;
 import com.online.store.repository.specification.ProductSpecification;
-import com.online.store.service.CategoryService;
-import com.online.store.service.FileService;
-import com.online.store.service.ImageService;
-import com.online.store.service.ProductService;
+import com.online.store.service.*;
 import com.online.store.util.Constant;
 import com.online.store.util.ProductConversionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +29,16 @@ import static com.online.store.util.ValidationUtil.isNull;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final CategoryService categoryService;
-    private final FeatureServiceImpl featureService;
+    private final FeatureService featureService;
     private final ImageService imageService;
     private final FileService fileService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, UserServiceImpl userService, CategoryService categoryService, FeatureServiceImpl featureService, ImageService imageService, FileService fileService) {
+    public ProductServiceImpl(ProductRepository productRepository, UserService userService,
+                              CategoryService categoryService, FeatureService featureService,
+                              ImageService imageService, FileService fileService) {
         this.productRepository = productRepository;
         this.userService = userService;
         this.categoryService = categoryService;
