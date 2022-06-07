@@ -1,8 +1,8 @@
 package com.online.store.config;
 
+import com.online.store.service.impl.UserDetailsServiceImpl;
 import com.online.store.seсurity.AuthEntryPointJwt;
 import com.online.store.seсurity.AuthTokenFilter;
-import com.online.store.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

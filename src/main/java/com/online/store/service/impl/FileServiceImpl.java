@@ -24,17 +24,12 @@ import static com.online.store.exception.NotFoundException.notFoundException;
 @Service
 public class FileServiceImpl implements FileService {
 
-    @Value("${spring.root.files}")
-    private static String pathFile;
+    private static String pathFile = "resources\\files";
 
     private static final Path ROOT_FILES = Paths.get(pathFile);
 
-    private final FileRepository fileRepository;
-
     @Autowired
-    public FileServiceImpl(FileRepository fileRepository) {
-        this.fileRepository = fileRepository;
-    }
+    private FileRepository fileRepository;
 
 
     @Override

@@ -29,17 +29,12 @@ public class OrderServiceImpl implements OrderService {
     public static final String NUMBER_OF_ORDER = "%09d";
     public static final int DELIVERY_DEFAULT_VALUE = 0;
 
-    private final OrderRepository orderRepository;
-
-    private final UserService userService;
-    private final CardService cardService;
-
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, UserService userService, CardService cardService) {
-        this.orderRepository = orderRepository;
-        this.userService = userService;
-        this.cardService = cardService;
-    }
+    private OrderRepository orderRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CardService cardService;
 
 
     @Transactional

@@ -25,18 +25,12 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @Service
 public class ImageServiceImpl implements ImageService {
 
-    @Value("${spring.root.images}")
-    private static String pathImage;
+    private static String pathImage = "resources\\images";
 
     private static final Path ROOT_IMAGES = Paths.get(pathImage);
 
-
-    private final ImageRepository imageRepository;
-
     @Autowired
-    public ImageServiceImpl(ImageRepository imageRepository) {
-        this.imageRepository = imageRepository;
-    }
+    private ImageRepository imageRepository;
 
 
     @Override

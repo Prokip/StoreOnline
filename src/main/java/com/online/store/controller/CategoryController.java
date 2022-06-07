@@ -13,18 +13,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
 
-    private final CategoryService categoryService;
-
     @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
-
+    private CategoryService categoryService;
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> findCategory(@PathVariable Long id) {

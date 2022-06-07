@@ -28,24 +28,18 @@ import static com.online.store.util.ValidationUtil.isNull;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
-    private final UserService userService;
-    private final CategoryService categoryService;
-    private final FeatureService featureService;
-    private final ImageService imageService;
-    private final FileService fileService;
-
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, UserService userService,
-                              CategoryService categoryService, FeatureService featureService,
-                              ImageService imageService, FileService fileService) {
-        this.productRepository = productRepository;
-        this.userService = userService;
-        this.categoryService = categoryService;
-        this.featureService = featureService;
-        this.imageService = imageService;
-        this.fileService = fileService;
-    }
+    private ProductRepository productRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private FeatureService featureService;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private FileService fileService;
 
 
     @Transactional

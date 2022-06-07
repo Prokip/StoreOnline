@@ -3,6 +3,7 @@ package com.online.store.controller;
 import com.online.store.dto.request.FeatureRequest;
 import com.online.store.dto.response.FeatureResponse;
 import com.online.store.service.FeatureService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,17 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/features")
 public class FeatureController {
 
-    private final FeatureService featureService;
-
     @Autowired
-    public FeatureController(FeatureService featureService) {
-        this.featureService = featureService;
-    }
+    private FeatureService featureService;
 
 
     @GetMapping("/{id}")

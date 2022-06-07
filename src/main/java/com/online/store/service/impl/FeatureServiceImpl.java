@@ -19,14 +19,10 @@ import static com.online.store.exception.NotFoundException.notFoundException;
 @Service
 public class FeatureServiceImpl implements FeatureService {
 
-    private final FeatureRepository featureRepository;
-    private final FeatureKeyRepository featureKeyRepository;
-
     @Autowired
-    public FeatureServiceImpl(FeatureRepository featureRepository, FeatureKeyRepository featureKeyRepository) {
-        this.featureRepository = featureRepository;
-        this.featureKeyRepository = featureKeyRepository;
-    }
+    private FeatureRepository featureRepository;
+    @Autowired
+    private FeatureKeyRepository featureKeyRepository;
 
 
     @Override

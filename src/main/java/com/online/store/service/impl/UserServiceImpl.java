@@ -41,20 +41,16 @@ import static com.online.store.util.UserConversionUtil.fromUserToUserResponse;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final JwtUtils jwtUtils;
-    private final AuthenticationManager authenticationManager;
-    private final PasswordEncoder passwordEncoder;
-
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, JwtUtils jwtUtils, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.jwtUtils = jwtUtils;
-        this.authenticationManager = authenticationManager;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private JwtUtils jwtUtils;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override

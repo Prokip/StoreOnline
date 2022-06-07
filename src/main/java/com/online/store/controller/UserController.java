@@ -11,6 +11,10 @@ import com.online.store.dto.response.UserResponse;
 import com.online.store.service.CardService;
 import com.online.store.service.OrderService;
 import com.online.store.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,21 +26,16 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
-    private final OrderService orderService;
-    private final CardService cardService;
-
     @Autowired
-    public UserController(UserService userService, OrderService orderService, CardService cardService) {
-        this.userService = userService;
-        this.orderService = orderService;
-        this.cardService = cardService;
-    }
+    private UserService userService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private CardService cardService;
 
 
     @PostMapping("/register")

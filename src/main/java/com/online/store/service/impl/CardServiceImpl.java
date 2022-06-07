@@ -21,14 +21,10 @@ import static com.online.store.util.MessagesErrors.CHANGE_PERMISSION;
 @Service
 public class CardServiceImpl implements CardService {
 
-    private final CardRepository cardRepository;
-    private final ProductService productService;
-
     @Autowired
-    public CardServiceImpl(CardRepository cardRepository, ProductService productService) {
-        this.cardRepository = cardRepository;
-        this.productService = productService;
-    }
+    private CardRepository cardRepository;
+    @Autowired
+    private ProductService productService;
 
 
     @Transactional
