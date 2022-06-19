@@ -1,8 +1,11 @@
 package com.online.store.util;
 
 import com.online.store.dto.request.UserRequest;
+import com.online.store.dto.response.UserLoginResponse;
 import com.online.store.dto.response.UserResponse;
 import com.online.store.entity.User;
+import com.online.store.service.impl.UserDetailsImpl;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.stream.Collectors;
 
@@ -10,7 +13,7 @@ import static com.online.store.util.ValidationUtil.isNullOrEmpty;
 
 public class UserConversionUtil {
 
-    public static User toUser(User user, UserRequest userRequest) {
+    public User toUser(User user, UserRequest userRequest) {
         if (user == null) {
             return null;
         }
@@ -38,7 +41,7 @@ public class UserConversionUtil {
         return user;
     }
 
-    public static UserResponse fromUserToUserResponse(User user) {
+    public UserResponse fromUserToUserResponse(User user) {
         if (user == null) {
             return new UserResponse();
         }
@@ -54,6 +57,17 @@ public class UserConversionUtil {
                 .map(roles -> roles.getRole().name())
                 .collect(Collectors.toList()));
         return userResponse;
+    }
+
+    public UserLoginResponse getJwtResponse(String jwt, UserDetailsImpl userDetails) {
+        UserLoginResponse userLoginResponse = new UserLoginResponse();
+        userLoginResponse.setToken(jwt);
+        userLoginResponse.setId(userDetails.getId());
+        userLoginResponse.setUsername(userDetails.getUsername());
+        userLoginResponse.setRoles(userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
+        return userLoginResponse;
     }
 
 }

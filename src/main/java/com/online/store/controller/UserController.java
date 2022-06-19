@@ -11,10 +11,6 @@ import com.online.store.dto.response.UserResponse;
 import com.online.store.service.CardService;
 import com.online.store.service.OrderService;
 import com.online.store.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,16 +52,16 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public List<UserResponse> getAllUsers(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
-                                          @RequestParam(required = false, defaultValue = "20") Integer pageSize,
-                                          @RequestParam(required = false, defaultValue = "firstName") String sortBy) {
+    public List<UserResponse> findAllUsers(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
+                                           @RequestParam(required = false, defaultValue = "20") Integer pageSize,
+                                           @RequestParam(required = false, defaultValue = "firstName") String sortBy) {
         log.info("Request to get all users {}", sortBy);
         return userService.findAllUsers(pageNumber, pageSize, sortBy);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> findUserById(@PathVariable Long id) {
         log.info("Request to get user by id {}", id);
         return ResponseEntity
                 .ok()
@@ -99,7 +95,7 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/orders/{id}")
-    public ResponseEntity<OrderResponse> getOrderById(@PathVariable Long id) {
+    public ResponseEntity<OrderResponse> findOrderById(@PathVariable Long id) {
         log.info("Request to get order {}", id);
         return ResponseEntity
                 .ok()

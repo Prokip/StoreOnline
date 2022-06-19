@@ -1,6 +1,7 @@
 package com.online.store.dto.request;
 
 import com.online.store.entity.Product;
+import com.online.store.util.ProductConversionUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,6 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.online.store.util.ProductConversionUtil.toProduct;
 
 @Getter
 @Setter
@@ -64,7 +64,7 @@ public class ProductRequest {
         if (product == null) {
             return;
         }
-        toProduct(product, this);
+        new ProductConversionUtil().toProduct(product, this);
     }
 
 

@@ -8,8 +8,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.*;
 
-import static com.online.store.util.UserConversionUtil.toUser;
-
 @Getter
 @Setter
 public class UserRequest {
@@ -49,7 +47,7 @@ public class UserRequest {
     private String countryCode = "UA";
 
     public User convertToUser(User user) {
-        return toUser(user, this);
+        return new UserConversionUtil().toUser(user, this);
     }
 
 }

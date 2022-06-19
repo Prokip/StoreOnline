@@ -1,5 +1,6 @@
 package com.online.store.service.impl;
 
+import com.online.store.dto.request.CategoryFindRequest;
 import com.online.store.dto.request.CategoryRequest;
 import com.online.store.dto.response.CategoryResponse;
 import com.online.store.entity.Category;
@@ -59,10 +60,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponse> findAll(Integer pageNumber, Integer pageSize, String sortBy,
-                                          String parentCategory, String name) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, sortBy));
-        return categoryRepository.findAll(new CategorySpecification(parentCategory, name), pageRequest).toList().stream()
+    public List<CategoryResponse> findAll(CategoryFindRequest categoryFindRequest) {
+        PageRequest pageRequest = PageRequest.of(categoryFindRequest.getPageNumber(),
+                categoryFindRequest.getPageSize(), Sort.by(Sort.Direction.ASC, categoryFindRequest.getSortBy()));
+        return categoryRepository.findAll(new CategorySpecification(categoryFindRequest.getParentCategory(),
+                categoryFindRequest.getName()), pageRequest).toList().stream()
                 .map(this::getCategoryResponse)
                 .collect(Collectors.toList());
     }

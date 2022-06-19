@@ -20,7 +20,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,6 @@ import static com.online.store.exception.AlreadyExistException.isExistsException
 import static com.online.store.exception.NotFoundException.notFoundException;
 import static com.online.store.util.Constant.EMAIL;
 import static com.online.store.util.Constant.USER;
-import static com.online.store.util.UserConversionUtil.fromUserToUserResponse;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -59,24 +57,24 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> notFoundException(USER));
         Authentication authentication = getAuthentication(userLoginRequest);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        return getJwtResponse(jwtUtils.generateJwtToken(authentication), userDetails);
+        return new UserConversionUtil().getJwtResponse(jwtUtils.generateJwtToken(authentication), userDetails);
     }
 
     @Override
     public UserResponse createUser(UserRequest userRequest) {
-        if (userRepository.findUserByEmail(userRequest.getEmail()).isPresent()) {
+        if (!userRepository.findUserByEmail(userRequest.getEmail()).isEmpty()) {
             throw isExistsException(USER + userRequest.getEmail());
         }
         User user = userRequest.convertToUser(new User());
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         setDefault(user);
         userRepository.save(user);
-        return fromUserToUserResponse(user);
+        return new UserConversionUtil().fromUserToUserResponse(user);
     }
 
     @Override
     public UserResponse getUserById(Long id) {
-        return fromUserToUserResponse(getUserByIdFromDB(id));
+        return new UserConversionUtil().fromUserToUserResponse(getUserByIdFromDB(id));
     }
 
     @Override
@@ -90,7 +88,7 @@ public class UserServiceImpl implements UserService {
         User user = getUserByIdFromDB(id);
         userRequest.convertToUser(user);
         userRepository.save(user);
-        return fromUserToUserResponse(user);
+        return new UserConversionUtil().fromUserToUserResponse(user);
     }
 
     @Override
@@ -127,17 +125,6 @@ public class UserServiceImpl implements UserService {
         user.setDiscount(3);
     }
 
-    private UserLoginResponse getJwtResponse(String jwt, UserDetailsImpl userDetails) {
-        UserLoginResponse userLoginResponse = new UserLoginResponse();
-        userLoginResponse.setToken(jwt);
-        userLoginResponse.setId(userDetails.getId());
-        userLoginResponse.setUsername(userDetails.getUsername());
-        userLoginResponse.setRoles(userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList()));
-        return userLoginResponse;
-    }
-
     private Authentication getAuthentication(UserLoginRequest userLoginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLoginRequest.getEmail(), userLoginRequest.getPassword()));
@@ -147,7 +134,7 @@ public class UserServiceImpl implements UserService {
 
     private List<UserResponse> getUserResponse(List<User> userList) {
         return userList.stream()
-                .map(UserConversionUtil::fromUserToUserResponse)
+                .map(user -> new UserConversionUtil().fromUserToUserResponse(user))
                 .collect(Collectors.toList());
     }
 

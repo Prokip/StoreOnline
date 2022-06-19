@@ -10,6 +10,4 @@ import java.util.List;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
 
-    List<Category> findByParentCategory(Category category);
-
 }

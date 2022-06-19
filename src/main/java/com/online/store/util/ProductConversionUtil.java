@@ -13,7 +13,7 @@ import static com.online.store.util.ValidationUtil.isNullOrEmpty;
 
 public class ProductConversionUtil {
 
-    public static Product toProduct(Product product, ProductRequest productRequest) {
+    public Product toProduct(Product product, ProductRequest productRequest) {
         if (product == null) {
             return null;
         }
@@ -38,7 +38,7 @@ public class ProductConversionUtil {
         return product;
     }
 
-    public static ProductResponse fromProduct(Product product) {
+    public ProductResponse fromProduct(Product product) {
         if (product == null) {
             return new ProductResponse();
         }

@@ -3,7 +3,6 @@ package com.online.store.controller;
 import com.online.store.dto.request.FeatureRequest;
 import com.online.store.dto.response.FeatureResponse;
 import com.online.store.service.FeatureService;
-import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

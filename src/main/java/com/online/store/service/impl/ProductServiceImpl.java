@@ -1,5 +1,6 @@
 package com.online.store.service.impl;
 
+import com.online.store.dto.request.ProductFindRequest;
 import com.online.store.dto.request.ProductRequest;
 import com.online.store.dto.response.ProductResponse;
 import com.online.store.entity.FeatureKey;
@@ -22,7 +23,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.online.store.exception.NotFoundException.notFoundException;
-import static com.online.store.util.ProductConversionUtil.fromProduct;
 import static com.online.store.util.ValidationUtil.isNull;
 
 @Service
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRequest.getProduct();
         setFieldsToProduct(productRequest, product);
         productRepository.save(product);
-        return fromProduct(product);
+        return new ProductConversionUtil().fromProduct(product);
     }
 
     @Transactional
@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
         productRequest.compareProduct();
         setFieldsToProduct(productRequest, product);
         productRepository.save(product);
-        return fromProduct(product);
+        return new ProductConversionUtil().fromProduct(product);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse findProductById(Long id) {
-        return fromProduct(findProductByIdFromDB(id));
+        return new ProductConversionUtil().fromProduct(findProductByIdFromDB(id));
     }
 
     @Override
@@ -96,19 +96,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> findProductByParam(Integer pageNumber, Integer pageSize, String sortBy,
-                                                    String category, String feature, String name,
-                                                    Integer price, String parentCategory) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, sortBy));
-        ProductSpecification productSpecification = new ProductSpecification(price, category,
-                feature, name, parentCategory);
+    public List<ProductResponse> findProductByParam(ProductFindRequest productFindRequest) {
+        PageRequest pageRequest = PageRequest.of(productFindRequest.getPageNumber(),
+                productFindRequest.getPageSize(), Sort.by(Sort.Direction.ASC, productFindRequest.getSortBy()));
+        ProductSpecification productSpecification = new ProductSpecification(productFindRequest.getPrice(),
+                productFindRequest.getCategory(), productFindRequest.getFeature(),
+                productFindRequest.getName(), productFindRequest.getParentCategory());
         List<Product> productList = productRepository.findAll(productSpecification, pageRequest).toList();
         return getProductResponses(productList);
     }
 
     private List<ProductResponse> getProductResponses(List<Product> productList) {
         return productList.stream()
-                .map(ProductConversionUtil::fromProduct)
+                .map(product -> new ProductConversionUtil().fromProduct(product))
                 .collect(Collectors.toList());
     }
 

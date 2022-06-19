@@ -1,5 +1,6 @@
 package com.online.store.service;
 
+import com.online.store.dto.request.CategoryFindRequest;
 import com.online.store.dto.request.CategoryRequest;
 import com.online.store.dto.response.CategoryResponse;
 import com.online.store.entity.Category;
@@ -18,6 +19,6 @@ public interface CategoryService {
 
     Category findByIdFromDB(Long id);
 
-    List<CategoryResponse> findAll(Integer pageNumber, Integer pageSize, String sortBy,
-                                   String parentCategory, String name);
+    List<CategoryResponse> findAll(CategoryFindRequest categoryFindRequest);
+
 }
