@@ -1,6 +1,8 @@
 package com.online.store.controller;
 
 import com.online.store.service.ImageService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
+@Api("REST APIs related to Image Entity")
 @RestController
 @RequestMapping("/images")
 public class ImageController {
@@ -18,7 +21,7 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-
+    @ApiOperation(value = "Get image by id from the system")
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     @ResponseBody
@@ -30,16 +33,18 @@ public class ImageController {
                 .body(image);
     }
 
+    @ApiOperation(value = "Creates a new image in the system")
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
-    public void createProductImage(@RequestParam("path") MultipartFile path) {
+    public void createImage(@RequestParam("path") MultipartFile path) {
         log.info("Request to create image {}", path);
         imageService.saveProductImages(path);
     }
 
+    @ApiOperation(value = "Delete image from the system by id")
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
-    public void deleteProductImage(@PathVariable Long id) {
+    public void deleteImage(@PathVariable Long id) {
         log.info("Request to delete image {}", id);
         imageService.deleteProductImage(id);
     }

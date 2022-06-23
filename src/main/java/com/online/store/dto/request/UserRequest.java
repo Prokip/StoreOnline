@@ -3,6 +3,7 @@ package com.online.store.dto.request;
 import com.online.store.entity.User;
 import com.online.store.util.Constant;
 import com.online.store.util.UserConversionUtil;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,6 +47,7 @@ public class UserRequest {
     @Pattern(regexp = Constant.COUNTRY_REGEXP, message = "country code must be short form like USA")
     private String countryCode = "UA";
 
+    @ApiModelProperty(hidden = true)
     public User convertToUser(User user) {
         return new UserConversionUtil().toUser(user, this);
     }
