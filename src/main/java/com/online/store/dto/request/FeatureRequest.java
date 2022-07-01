@@ -14,7 +14,7 @@ public class FeatureRequest extends IdHolder {
 
     @NotBlank(message = "name must not be empty")
     @NotNull(message = "Name is missing")
-    @Size(max = 250)
+    @Size(max = 255)
     private String name;
 
 }

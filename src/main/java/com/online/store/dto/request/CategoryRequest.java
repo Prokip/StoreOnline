@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Setter
 public class CategoryRequest {
 
-    @Size(max = 250)
+    @Size(max = 255)
     @NotBlank(message = "name must not be empty")
     @NotNull(message = "name of category is missing")
     private String name;

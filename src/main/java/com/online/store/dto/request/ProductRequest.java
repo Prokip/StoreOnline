@@ -26,7 +26,7 @@ public class ProductRequest {
     private String name;
 
     @ApiModelProperty(notes = "The code/article of the product")
-    @Size(max = 150)
+    @Size(max = 100)
     @NotBlank(message = "codeUnit must be not empty")
     @NotNull(message = "codeUnit is missing")
     private String codeUnit;
@@ -45,7 +45,7 @@ public class ProductRequest {
     private Integer price;
 
     @ApiModelProperty(notes = "The product description")
-    @Size(max = 250)
+    @Size(max = 255)
     private String description = "";
 
     @ApiModelProperty(notes = "CategoryId of product")

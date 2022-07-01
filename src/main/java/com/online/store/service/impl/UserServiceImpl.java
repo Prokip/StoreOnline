@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse modifyUser(UserRequest userRequest, Long id) {
         User user = getUserByIdFromDB(id);
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         userRequest.convertToUser(user);
         userRepository.save(user);
         return new UserConversionUtil().fromUserToUserResponse(user);
