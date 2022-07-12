@@ -1,6 +1,7 @@
 package com.online.store.entity;
 
 import com.online.store.entity.enums.Role;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,12 @@ public class Roles extends IdHolder {
     @ManyToMany(mappedBy = ROLES)
     private Set<User> users = new HashSet<>();
 
+    public Roles() {
+    }
+
+    public Roles(Role role) {
+        this.role = role;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -96,7 +96,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> findProductByParam(ProductFindRequest productFindRequest) {
+    public List<ProductResponse> findProductsByParam(ProductFindRequest productFindRequest) {
         PageRequest pageRequest = PageRequest.of(productFindRequest.getPageNumber(),
                 productFindRequest.getPageSize(), Sort.by(Sort.Direction.ASC, productFindRequest.getSortBy()));
         ProductSpecification productSpecification = new ProductSpecification(productFindRequest.getPrice(),

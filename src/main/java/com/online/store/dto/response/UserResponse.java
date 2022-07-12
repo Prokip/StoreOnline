@@ -25,4 +25,17 @@ public class UserResponse {
 
     private List<String> roles;
 
+
+    @Override
+    public String toString() {
+        return "UserResponse{" +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

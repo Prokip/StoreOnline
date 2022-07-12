@@ -47,6 +47,18 @@ public class UserRequest {
     @Pattern(regexp = Constant.COUNTRY_REGEXP, message = "country code must be short form like USA")
     private String countryCode = "UA";
 
+
+    public UserRequest() {
+    }
+
+    public UserRequest(String password, String firstName, String lastName, String email) {
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+
     @ApiModelProperty(hidden = true)
     public User convertToUser(User user) {
         return new UserConversionUtil().toUser(user, this);

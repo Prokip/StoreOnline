@@ -23,6 +23,6 @@ public interface ProductService {
 
     void deleteProductFromFavourites(Long id, Long productId);
 
-    List<ProductResponse> findProductByParam(ProductFindRequest productFindRequest);
+    List<ProductResponse> findProductsByParam(ProductFindRequest productFindRequest);
 
 }

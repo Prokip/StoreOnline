@@ -64,15 +64,26 @@ public class ProductRequest {
     private Product product;
 
 
+    public ProductRequest() {
+    }
+
+    public ProductRequest(String name, String codeUnit, Boolean isActive, Integer maxPrice,
+                          Integer price, Long categoryId) {
+        this.name = name;
+        this.codeUnit = codeUnit;
+        this.isActive = isActive;
+        this.maxPrice = maxPrice;
+        this.price = price;
+        this.categoryId = categoryId;
+    }
+
+
     public void putProduct(Product product) {
         this.product = product;
     }
 
-    public void compareProduct() {
-        if (product == null) {
-            return;
-        }
-        new ProductConversionUtil().toProduct(product, this);
+    public Product compareProduct() {
+        return new ProductConversionUtil().toProduct(product, this);
     }
 
 

@@ -26,7 +26,7 @@ public class ProductController {
     @PostMapping("/all")
     public List<ProductResponse> findProductsByParam(@Valid @RequestBody ProductFindRequest productFindRequest) {
         log.info("Request to find all products {}", productFindRequest);
-        return productService.findProductByParam(productFindRequest);
+        return productService.findProductsByParam(productFindRequest);
     }
 
     @ApiOperation(value = "Search a product with an ID")

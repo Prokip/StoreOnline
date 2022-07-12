@@ -64,6 +64,18 @@ public class Product extends IdHolder {
     @ManyToMany(mappedBy = FAVOURITES)
     private Set<User> users = new HashSet<>();
 
+    public Product() {
+    }
+
+    public Product(String name, String codeUnit, Boolean isActive, Integer maxPrice, Integer price,
+                    Category category) {
+        this.name = name;
+        this.codeUnit = codeUnit;
+        this.maxPrice = maxPrice;
+        this.price = price;
+        this.isActive = isActive;
+        this.category = category;
+    }
 
     public void addFeatureKey(FeatureKey featureKey) {
         this.getFeatureKeys().add(featureKey);

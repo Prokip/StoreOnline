@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse createUser(UserRequest userRequest) {
         if (!userRepository.findUserByEmail(userRequest.getEmail()).isEmpty()) {
-            throw isExistsException(USER + userRequest.getEmail());
+            throw isExistsException(USER);
         }
         User user = userRequest.convertToUser(new User());
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse modifyUser(UserRequest userRequest, Long id) {
         User user = getUserByIdFromDB(id);
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        changePassword(userRequest, user);
         userRequest.convertToUser(user);
         userRepository.save(user);
         return new UserConversionUtil().fromUserToUserResponse(user);
@@ -138,5 +138,12 @@ public class UserServiceImpl implements UserService {
                 .map(user -> new UserConversionUtil().fromUserToUserResponse(user))
                 .collect(Collectors.toList());
     }
+
+    private void changePassword(UserRequest userRequest, User user) {
+        if (userRequest.getEmail() != null) {
+            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        }
+    }
+
 
 }

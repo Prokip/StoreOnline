@@ -22,4 +22,14 @@ public class ProductFindRequest {
     private Integer pageSize = 20;
     private String sortBy = "name";
 
+
+    public ProductFindRequest() {
+    }
+
+    public ProductFindRequest(String name, Integer pageNumber, Integer pageSize, String sortBy) {
+        this.name = name;
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
+        this.sortBy = sortBy;
+    }
 }
